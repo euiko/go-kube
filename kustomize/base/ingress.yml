@@ -11,4 +11,4 @@ spec:
         paths:
         - backend:
             serviceName: go-kube
-            servicePort: 3000
+            servicePort: 80

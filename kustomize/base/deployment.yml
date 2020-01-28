@@ -4,7 +4,6 @@ kind: Deployment
 metadata:
   name: go-kube
 spec:
-  replicas: 3
   selector:
     matchLabels:
       app: go-kube
