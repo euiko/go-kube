@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: go-kube
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: go-kube.mlg-dev.local
+spec:
+  rules:
+    - host: go-kube.mlg-dev.local
+      http:
+        paths:
+        - backend:
+            serviceName: go-kube
+            servicePort: 3000

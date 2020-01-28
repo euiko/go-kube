@@ -2,20 +2,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: go-hey-kube
+  name: go-kube
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: go-hey-kube
+      app: go-kube
   template:
     metadata:
       labels:
-        app: go-hey-kube
+        app: go-kube
     spec:
       containers:
-        - name: go-hey-kube
-          image: euiko/go-hey-kube:1.0.1
+        - name: go-kube
+          image: euiko/go-kube
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
