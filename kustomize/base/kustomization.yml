@@ -4,4 +4,4 @@ resources:
   - ingress.yml
 images:
   - name: euiko/go-kube
-    newTag: 1.0.1
+    newTag: 1.0.3
