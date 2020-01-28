@@ -1,28 +1,27 @@
 # golang builder
-FROM golang:latest as builder
+FROM golang:1.13-alpine as builder
 
 LABEL maintainer="Galih Rivanto <galih.rivanto@gmail.com>"
 
 # working directory inside container
 WORKDIR /app
 
-# copy go mod and sum files
-COPY go.mod go.sum ./
+# copy source to working dir
+COPY . .
 
 # download dependencies
 RUN go mod download
-
-# copy source to working dir
-COPY . .
 
 # build
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 
 # start target
-FROM alpine:latest
+FROM alpine:3.11
 
+# setup ssl client
 RUN apk --no-cache add ca-certificates
 
+# change workdir to /root
 WORKDIR /root/
 
 # copy prebuild binary from prev stage
@@ -32,4 +31,4 @@ COPY --from=builder /app/main .
 EXPOSE 8080
 
 # run app
-CMD ["./main"]
+ENTRYPOINT ["./main"]

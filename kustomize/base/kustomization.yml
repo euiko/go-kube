@@ -1,0 +1,5 @@
+resources:
+  - deployment.yml
+images:
+  - name: euiko/go-hey-kube
+    newTag: 1.0.1
