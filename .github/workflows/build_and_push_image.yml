@@ -109,3 +109,4 @@ jobs:
         uses: ad-m/github-push-action@v0.5.0
         with:
           github_token: ${{ secrets.CONFIG_GITHUB_TOKEN }}
+          repository: "${{ env.CONFIG_REPO }}"
