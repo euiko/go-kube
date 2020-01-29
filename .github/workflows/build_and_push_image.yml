@@ -76,7 +76,7 @@ jobs:
           path: image_version
   # Push image to GitHub Package Registry.
   # See also https://docs.docker.com/docker-hub/builds/
-  push:
+  update:
     # Ensure push job passes before pushing image.
     needs: push
     runs-on: ubuntu-latest
