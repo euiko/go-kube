@@ -95,12 +95,11 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: image_version
-          path: image_version
       - name: 'Kustomize update image tag'
         run: |
-          IMAGE_VERSION=$(cat image_version)
+          IMAGE_VERSION=$(cat image_version/image_version)
           echo "Update image version to ${IMAGE_VERSION}"
-          rm image_version
+          rm -Rf image_version
           cd $CONFIG_DIR
           git config --local user.email "ci@github.com"
           git config --local user.name "Github CI"
