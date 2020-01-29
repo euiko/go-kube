@@ -1,7 +1,0 @@
-resources:
-  - deployment.yml
-  - service.yml
-  - ingress.yml
-images:
-  - name: euiko/go-kube
-    newTag: 1.0.3
