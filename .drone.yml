@@ -1,0 +1,12 @@
+---
+kind: pipeline
+type: kubernetes
+name: default
+
+steps:
+- name: build image
+  image: golang:1.13-alpine
+  commands:
+  - go mod download
+  - go build
+  - go test

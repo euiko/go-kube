@@ -74,39 +74,37 @@ jobs:
         with:
           name: image_version
           path: image_version
-  # Push image to GitHub Package Registry.
-  # See also https://docs.docker.com/docker-hub/builds/
-  update:
-    # Ensure push job passes before pushing image.
-    needs: push
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-    steps:
-      - name: Setup Kustomize
-        uses: imranismail/setup-kustomize@v1.2.0
-        with:
-          kustomize-version: "3.5.4"
-      - name: Checkout config repository
-        uses: actions/checkout@v2
-        with:
-          repository: "${{ env.CONFIG_REPO }}"
-          token: "${{ secrets.CONFIG_GITHUB_TOKEN }}"
-      - name: Get image_version from previous step
-        uses: actions/download-artifact@v1
-        with:
-          name: image_version
-      - name: 'Kustomize update image tag'
-        run: |
-          IMAGE_VERSION=$(cat image_version/image_version)
-          echo "Update image version to ${IMAGE_VERSION}"
-          rm -Rf image_version
-          cd $CONFIG_DIR
-          git config --local user.email "ci@github.com"
-          git config --local user.name "Github CI"
-          kustomize edit set image $IMAGE_VERSION
-          git commit -m "Update image version to ${IMAGE_VERSION}" -a
-      - name: Push changes
-        uses: ad-m/github-push-action@v0.5.0
-        with:
-          github_token: ${{ secrets.CONFIG_GITHUB_TOKEN }}
-          repository: "${{ env.CONFIG_REPO }}"
+  # update:
+  #   # Ensure push job passes before pushing image.
+  #   needs: push
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push'
+  #   steps:
+  #     - name: Setup Kustomize
+  #       uses: imranismail/setup-kustomize@v1.2.0
+  #       with:
+  #         kustomize-version: "3.5.4"
+  #     - name: Checkout config repository
+  #       uses: actions/checkout@v2
+  #       with:
+  #         repository: "${{ env.CONFIG_REPO }}"
+  #         token: "${{ secrets.CONFIG_GITHUB_TOKEN }}"
+  #     - name: Get image_version from previous step
+  #       uses: actions/download-artifact@v1
+  #       with:
+  #         name: image_version
+  #     - name: 'Kustomize update image tag'
+  #       run: |
+  #         IMAGE_VERSION=$(cat image_version/image_version)
+  #         echo "Update image version to ${IMAGE_VERSION}"
+  #         rm -Rf image_version
+  #         cd $CONFIG_DIR
+  #         git config --local user.email "ci@github.com"
+  #         git config --local user.name "Github CI"
+  #         kustomize edit set image $IMAGE_VERSION
+  #         git commit -m "Update image version to ${IMAGE_VERSION}" -a
+  #     - name: Push changes
+  #       uses: ad-m/github-push-action@v0.5.0
+  #       with:
+  #         github_token: ${{ secrets.CONFIG_GITHUB_TOKEN }}
+  #         repository: "${{ env.CONFIG_REPO }}"
