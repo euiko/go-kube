@@ -9,7 +9,7 @@ steps:
   commands:
   - go mod download
   - go build
-  - go test
+  # - go test
 - name: push image
   image: plugins/docker
   settings:
