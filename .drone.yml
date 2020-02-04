@@ -16,3 +16,4 @@ steps:
     repo: docker-registry.mlg-dev.local/euiko/go-kube
     registry: docker-registry.mlg-dev.local
     tags: latest
+    insecure: true
